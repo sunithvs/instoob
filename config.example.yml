@@ -1,0 +1,21 @@
+# Instoob Configuration
+# Copy this file to config.yml and edit as needed.
+
+instagram:
+  username: "your_instagram_username"  # Instagram username to sync from
+  max_reels_per_run: 3                 # Max reels to process per sync cycle
+  max_duration: 180                    # Skip reels longer than N seconds (Shorts: up to 3 min)
+  # since_date: "2025-01-01"           # Only sync reels posted after this date (YYYY-MM-DD)
+
+youtube:
+  category_id: "22"              # 22 = People & Blogs
+  privacy_status: "public"       # public | unlisted | private
+  default_language: "en"
+  title_prefix: ""               # Optional prefix for video titles
+  title_suffix: ""               # Optional suffix for video titles
+  description_suffix: "\n\n#Shorts"
+  made_for_kids: false
+
+sync:
+  data_dir: "data"               # Where state file lives
+  download_dir: "downloads"      # Temp dir for video files (auto-cleaned)

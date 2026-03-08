@@ -1,0 +1,20 @@
+# Instoob Configuration
+
+instagram:
+  username: "truevibecoder"
+  max_reels_per_run: 3
+  max_duration: 0  # 0 = no limit (sync all reels regardless of duration)
+  since_date: "2026-01-01"  # Only sync reels posted after this date
+
+youtube:
+  category_id: "22"
+  privacy_status: "public"
+  default_language: "en"
+  title_prefix: ""
+  title_suffix: ""
+  description_suffix: "\n\n#Shorts"
+  made_for_kids: false
+
+sync:
+  data_dir: "data"
+  download_dir: "downloads"

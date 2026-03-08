@@ -1,0 +1,43 @@
+name: Sync Reels to Shorts
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # Every 6 hours
+  workflow_dispatch:        # Manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run sync
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          IG_PASSWORD: ${{ secrets.IG_PASSWORD }}
+          IG_SESSION_BASE64: ${{ secrets.IG_SESSION_BASE64 }}
+        run: python main.py sync
+
+      - name: Commit state changes
+        run: |
+          git config user.name "instoob-bot"
+          git config user.email "instoob-bot@users.noreply.github.com"
+          git add data/synced.json
+          git diff --staged --quiet || git commit -m "sync: update state [skip ci]"
+          git push
