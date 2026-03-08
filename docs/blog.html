@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Instoob</title>
+  <meta name="description" content="Behind the scenes of Instoob — why it was built, how it works, and who made it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://instoob.radr.in/blog" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instoob.radr.in/blog" />
+  <meta property="og:title" content="Blog — Instoob" />
+  <meta property="og:description" content="Behind the scenes of Instoob — why it was built, how it works, and who made it." />
+
+  <!-- SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Sunith VS" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>" />
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vsioifh9d1");
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .blog-hero {
+      padding: 80px 0 60px;
+    }
+    .blog-hero h1 {
+      margin-bottom: 12px;
+    }
+    .blog-hero p {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding-bottom: 120px;
+    }
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+    .blog-card-color {
+      height: 8px;
+    }
+    .blog-card-color.yellow { background: var(--yellow); }
+    .blog-card-color.purple { background: var(--purple); }
+    .blog-card-body {
+      padding: 32px;
+    }
+    .blog-card-date {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .blog-card-body h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .blog-card-body > p {
+      font-size: 0.92rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .blog-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .blog-read-more svg {
+      transition: transform 0.2s;
+    }
+    .blog-card:hover .blog-read-more svg {
+      transform: translateX(4px);
+    }
+
+    /* Blog post content */
+    .blog-post {
+      padding: 80px 0 120px;
+    }
+    .blog-post .container {
+      max-width: 720px;
+    }
+    .blog-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .blog-back:hover { color: var(--black); }
+    .blog-post-date {
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+    .blog-post h1 {
+      margin-bottom: 32px;
+    }
+    .blog-content h2 {
+      font-size: 1.4rem;
+      margin: 40px 0 16px;
+    }
+    .blog-content h3 {
+      font-size: 1.1rem;
+      margin: 32px 0 12px;
+    }
+    .blog-content p {
+      font-size: 1rem;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+    .blog-content ul, .blog-content ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .blog-content li {
+      font-size: 1rem;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+    .blog-content a {
+      color: var(--black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .blog-content blockquote {
+      border-left: 3px solid var(--gray-200);
+      padding-left: 20px;
+      margin: 24px 0;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .blog-author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .blog-author-info {
+      font-size: 0.88rem;
+    }
+    .blog-author-info strong {
+      display: block;
+      color: var(--black);
+    }
+    .blog-author-info span {
+      color: var(--gray-500);
+    }
+
+    @media (max-width: 640px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────── -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">instoob<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#setup">Setup</a></li>
+        <li><a href="index.html#config">Config</a></li>
+        <li><a href="index.html#auth">Auth</a></li>
+        <li><a href="blog.html" style="color: var(--black);">Blog</a></li>
+      </ul>
+      <a href="https://github.com/truevibecoder/instoob" class="nav-cta" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" /></svg>
+        GitHub
+      </a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Blog List ──────────────────────────────────── -->
+  <section class="blog-hero" id="blog-list">
+    <div class="container">
+      <div class="section-badge">Blog</div>
+      <h1>Behind<br/>the build.</h1>
+      <p>Stories, decisions, and the laziness that made this tool happen.</p>
+    </div>
+  </section>
+
+  <section id="blog-grid-section" style="padding-top: 0;">
+    <div class="container">
+      <div class="blog-grid">
+
+        <!-- Post 1 -->
+        <a href="#why-i-built-this" class="blog-card" onclick="return showPost('why-i-built-this')">
+          <div class="blog-card-color yellow"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">March 2026</div>
+            <h2>Why I Built Instoob</h2>
+            <p>I'm a lazy developer. I had Instagram Reels that needed to go on YouTube. Doing it manually? Absolutely not. So I built a tool that does it while I sleep.</p>
+            <span class="blog-read-more">
+              Read more
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- About Me - links to personal site -->
+        <a href="https://sunithvs.com" class="blog-card" target="_blank">
+          <div class="blog-card-color purple"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">Sunith VS</div>
+            <h2>About Me</h2>
+            <p>Developer who believes the best code is the code that runs itself. Check out my personal site for more projects and writing.</p>
+            <span class="blog-read-more">
+              Visit sunithvs.com
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Post: Why I Built This ─────────────────────── -->
+  <article class="blog-post" id="why-i-built-this" style="display: none;">
+    <div class="container">
+      <a href="#blog-list" class="blog-back" onclick="return showList()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 8H3M7 4L3 8l4 4"/></svg>
+        Back to blog
+      </a>
+      <div class="blog-post-date">March 2026</div>
+      <h1>Why I Built Instoob</h1>
+      <div class="blog-content">
+        <p>
+          Let me be honest: I built this because I'm lazy. Not the bad kind of lazy
+          &mdash; the developer kind, where you spend 8 hours automating a 10-minute task
+          because the thought of doing it manually even once more makes you physically uncomfortable.
+        </p>
+
+        <h2>The Problem</h2>
+        <p>
+          I post Reels on Instagram. Cool videos, decent edits, sometimes even good content.
+          But YouTube Shorts? That's a whole different audience, a whole different algorithm,
+          and a whole different upload flow. Download the reel, open YouTube Studio, fill in
+          the title, paste the description, add hashtags, set visibility, click upload, wait...
+        </p>
+        <p>
+          Do that three times and you start questioning your life choices. Do it ten times
+          and you start writing Python scripts.
+        </p>
+
+        <h2>The "Aha" Moment</h2>
+        <p>
+          I realized the entire workflow is deterministic:
+        </p>
+        <ol>
+          <li>New reel appears on Instagram</li>
+          <li>Download the video</li>
+          <li>Extract caption and hashtags</li>
+          <li>Upload to YouTube with metadata</li>
+          <li>Don't upload the same one twice</li>
+        </ol>
+        <p>
+          No human judgment needed. No creative decisions. Just plumbing.
+          And if there's one thing developers are good at, it's building plumbing
+          that runs on a cron schedule.
+        </p>
+
+        <h2>Why Open Source?</h2>
+        <p>
+          Because I know I'm not the only lazy creator out there. The whole thing is
+          designed to be fork-friendly: clone the repo, edit one config file, add your
+          secrets, and you're done. GitHub Actions handles the rest &mdash; every 6 hours,
+          it checks for new reels and pushes them to YouTube. No servers, no costs, no
+          maintenance.
+        </p>
+
+        <h2>The Tech Stack</h2>
+        <p>
+          Nothing fancy. Python, because it's the fastest language to go from idea to
+          working script. Instaloader for Instagram (it handles all the weird Instagram
+          API stuff). YouTube Data API v3 for uploads. GitHub Actions for scheduling.
+          JSON for state tracking because SQLite felt like overkill for what's essentially
+          a list of shortcodes.
+        </p>
+
+        <h2>What I Learned</h2>
+        <ul>
+          <li>Instagram now requires auth even for public profiles (sessions expire, fun times)</li>
+          <li>YouTube Shorts can be up to 3 minutes now, not just 60 seconds</li>
+          <li>YouTube API quotas are tighter than you'd think (~6 uploads/day on free tier)</li>
+          <li>The best automation is the one you set up once and forget about</li>
+        </ul>
+
+        <blockquote>
+          The best code is the code you never have to run manually.
+        </blockquote>
+
+        <p>
+          If you're a creator who posts on both platforms and you're tired of the
+          copy-paste dance, give Instoob a try. Fork it, set it up in 10 minutes,
+          and never think about it again. That's the dream.
+        </p>
+      </div>
+
+      <div class="blog-author">
+        <div class="blog-author-avatar">S</div>
+        <div class="blog-author-info">
+          <strong>Sunith VS</strong>
+          <span>Developer &middot; <a href="https://sunithvs.com" target="_blank">sunithvs.com</a></span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-text">instoob &mdash; MIT License &mdash; Built by <a href="https://sunithvs.com" target="_blank" style="color: var(--gray-600); text-decoration: underline;">Sunith VS</a></span>
+      <ul class="footer-links">
+        <li><a href="https://github.com/truevibecoder/instoob" target="_blank">GitHub</a></li>
+        <li><a href="index.html">Docs</a></li>
+        <li><a href="index.html#setup">Setup Guide</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    function showPost(id) {
+      // Hide list sections
+      document.getElementById('blog-list').style.display = 'none';
+      document.getElementById('blog-grid-section').style.display = 'none';
+      // Show the post
+      document.getElementById(id).style.display = 'block';
+      window.scrollTo(0, 0);
+      return false;
+    }
+    function showList() {
+      document.querySelectorAll('.blog-post').forEach(p => p.style.display = 'none');
+      document.getElementById('blog-list').style.display = '';
+      document.getElementById('blog-grid-section').style.display = '';
+      window.scrollTo(0, 0);
+      return false;
+    }
+    // Handle direct URL hash navigation
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      if (id !== 'blog-list' && document.getElementById(id)) {
+        showPost(id);
+      }
+    }
+  </script>
+
+</body>
+</html>

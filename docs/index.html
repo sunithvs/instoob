@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instoob — Instagram Reels to YouTube Shorts</title>
+  <meta name="description" content="Automatically sync your Instagram Reels to YouTube Shorts. Fork-friendly, runs on GitHub Actions or locally." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://instoob.radr.in/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instoob.radr.in/" />
+  <meta property="og:title" content="Instoob — Instagram Reels to YouTube Shorts" />
+  <meta property="og:description" content="Automatically sync your Instagram Reels to YouTube Shorts. Fork-friendly, runs on GitHub Actions or locally." />
+  <meta property="og:image" content="https://instoob.radr.in/assets/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Instoob — Instagram Reels to YouTube Shorts" />
+  <meta name="twitter:description" content="Automatically sync your Instagram Reels to YouTube Shorts. Fork-friendly, runs on GitHub Actions or locally." />
+  <meta name="twitter:image" content="https://instoob.radr.in/assets/og-image.png" />
+
+  <!-- SEO extras -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Sunith VS" />
+  <meta name="keywords" content="instagram reels, youtube shorts, sync, automation, github actions, open source" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Instoob",
+    "description": "Automatically sync your Instagram Reels to YouTube Shorts. Fork-friendly, runs on GitHub Actions or locally.",
+    "url": "https://instoob.radr.in",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Sunith VS" },
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vsioifh9d1");
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────── -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">instoob<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#config">Config</a></li>
+        <li><a href="#auth">Auth</a></li>
+        <li><a href="#secrets">Secrets</a></li>
+        <li><a href="#troubleshooting">Help</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <a href="https://github.com/truevibecoder/instoob" class="nav-cta" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" /></svg>
+        GitHub
+      </a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Reels In.<br/>Shorts Out.<br/>Done.</h1>
+        <p>
+          Automatically sync your Instagram Reels to YouTube Shorts.
+          Fork the repo, add your credentials, and let GitHub Actions
+          handle the rest &mdash; effortlessly.
+        </p>
+        <div class="hero-actions">
+          <a href="#setup" class="btn-primary">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="https://github.com/truevibecoder/instoob" class="btn-secondary" target="_blank">
+            View Source
+          </a>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-icon yellow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          </div>
+          <h3>Fetch Reels</h3>
+          <p>Pulls latest reels from any public Instagram profile with smart filtering.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </div>
+          <h3>Upload Shorts</h3>
+          <p>Pushes videos to YouTube as Shorts with captions, tags, and metadata.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Auto Schedule</h3>
+          <p>Runs every 6 hours on GitHub Actions. Zero maintenance after setup.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Fork &amp; Go</h3>
+          <p>Clone, configure, deploy. Built for the simplest possible onboarding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How It Works ───────────────────────────────── -->
+  <section style="padding-top: 0;">
+    <div class="container">
+      <div class="flow">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-icon" style="background: var(--yellow);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+            </div>
+            <span>Instagram</span>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background: var(--purple);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            </div>
+            <span>Download</span>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background: var(--green);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </div>
+            <span>Upload</span>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background: var(--blue);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </div>
+            <span>YouTube Shorts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Quick Start ────────────────────────────────── -->
+  <section id="setup">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Quick Start</div>
+        <h2>Up and running<br/>in 6 steps.</h2>
+        <p>Fork the repo, configure your credentials, and sync automatically.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number n1">1</div>
+          <h3>Fork the Repository</h3>
+          <p>Click the Fork button on GitHub to create your own copy of instoob.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number n2">2</div>
+          <h3>Edit config.yml</h3>
+          <p>Set your Instagram username and adjust YouTube upload preferences.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number n3">3</div>
+          <h3>Set Up YouTube API</h3>
+          <p>Create a Google Cloud project, enable YouTube Data API v3, and get OAuth credentials.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number n4">4</div>
+          <h3>Get Refresh Token</h3>
+          <p>Run <code>python setup_youtube.py</code> locally to authorize your YouTube channel.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number n5">5</div>
+          <h3>Add GitHub Secrets</h3>
+          <p>Add your YouTube and Instagram credentials as repository secrets.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number n6">6</div>
+          <h3>Enable Actions</h3>
+          <p>Go to the Actions tab and enable workflows. Trigger manually or wait for the schedule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── YouTube API Setup ──────────────────────────── -->
+  <section id="youtube-setup" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">YouTube API</div>
+        <h2>YouTube setup<br/>walkthrough.</h2>
+        <p>One-time setup to connect your YouTube channel.</p>
+      </div>
+
+      <div class="steps-grid" style="grid-template-columns: 1fr 1fr;">
+        <div>
+          <div class="step-card" style="margin-bottom: 20px;">
+            <div class="step-number n1">1</div>
+            <h3>Create Google Cloud Project</h3>
+            <p>Go to Google Cloud Console, create a new project (e.g., "Instoob"), then navigate to APIs &amp; Services &gt; Library. Search for "YouTube Data API v3" and enable it.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number n2">2</div>
+            <h3>Create OAuth Credentials</h3>
+            <p>In APIs &amp; Services &gt; Credentials, click Create Credentials &gt; OAuth client ID. Configure the consent screen as External, add your email as a test user. Choose "Desktop app" type, then download the JSON file as <code>client_secrets.json</code>.</p>
+          </div>
+        </div>
+        <div>
+          <div class="step-card" style="margin-bottom: 20px;">
+            <div class="step-number n3">3</div>
+            <h3>Run Setup Script</h3>
+            <p>Place <code>client_secrets.json</code> in the project root and run the setup script.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">terminal</span>
+              </div>
+              <pre><code>pip install -r requirements.txt
+python setup_youtube.py</code></pre>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number n4">4</div>
+            <h3>Save Your Credentials</h3>
+            <p>The script opens a browser for consent, then prints your <code>YOUTUBE_CLIENT_ID</code>, <code>YOUTUBE_CLIENT_SECRET</code>, and <code>YOUTUBE_REFRESH_TOKEN</code>. Save these as GitHub Secrets.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding: 20px 24px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; font-size: 0.88rem; color: #92400e;">
+        <strong>Heads up:</strong> While your Google Cloud project is in "Testing" mode, refresh tokens expire every 7 days. Go to OAuth consent screen and click "Publish App" to avoid this.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Instagram Auth ─────────────────────────────── -->
+  <section id="auth">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Instagram</div>
+        <h2>Choose your<br/>auth method.</h2>
+        <p>Pick the method that works best for your account.</p>
+      </div>
+
+      <div class="auth-grid">
+        <div class="auth-card simple">
+          <div class="auth-card-badge">Simplest</div>
+          <h3>Password Login</h3>
+          <p>Add your Instagram password as the <code>IG_PASSWORD</code> GitHub Secret. The tool logs in automatically on every run. Best for accounts without 2FA.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="code-dots"><span></span><span></span><span></span></div>
+              <span class="code-label">GitHub Secret</span>
+            </div>
+            <pre><code><span class="code-key">IG_PASSWORD</span> = <span class="code-string">your_password</span></code></pre>
+          </div>
+        </div>
+        <div class="auth-card secure">
+          <div class="auth-card-badge">For 2FA</div>
+          <h3>Session Cookie</h3>
+          <p>For accounts with two-factor authentication enabled. Login once locally, export the session, and store it as a base64 secret.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="code-dots"><span></span><span></span><span></span></div>
+              <span class="code-label">terminal</span>
+            </div>
+            <pre><code><span class="code-comment"># Login once (handles 2FA prompt)</span>
+instaloader --login YOUR_USERNAME
+
+<span class="code-comment"># Export session as base64</span>
+base64 -i ~/.config/instaloader/\
+session-YOUR_USERNAME</code></pre>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--gray-400); margin-top: 8px;">Copy the output and add it as <code>IG_SESSION_BASE64</code> in GitHub Secrets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Configuration ──────────────────────────────── -->
+  <section id="config" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Configuration</div>
+        <h2>Customize<br/>everything.</h2>
+        <p>Edit <code>config.yml</code> to control what gets synced and how.</p>
+      </div>
+
+      <div class="config-layout">
+        <div class="config-options">
+          <div class="config-option">
+            <h4>username <span class="config-tag required">Required</span></h4>
+            <p>Instagram username to sync reels from.</p>
+          </div>
+          <div class="config-option">
+            <h4>max_reels_per_run <span class="config-tag optional">Optional</span></h4>
+            <p>Maximum reels to process per sync cycle. Default: 3.</p>
+          </div>
+          <div class="config-option">
+            <h4>max_duration <span class="config-tag optional">Optional</span></h4>
+            <p>Skip reels longer than N seconds. Set to 0 for no limit. Default: 180.</p>
+          </div>
+          <div class="config-option">
+            <h4>since_date <span class="config-tag optional">Optional</span></h4>
+            <p>Only sync reels posted after this date (YYYY-MM-DD format).</p>
+          </div>
+          <div class="config-option">
+            <h4>privacy_status <span class="config-tag optional">Optional</span></h4>
+            <p>YouTube upload visibility: public, unlisted, or private.</p>
+          </div>
+          <div class="config-option">
+            <h4>made_for_kids <span class="config-tag optional">Optional</span></h4>
+            <p>Whether uploaded Shorts are marked as made for kids. Default: false.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="code-dots"><span></span><span></span><span></span></div>
+              <span class="code-label">config.yml</span>
+            </div>
+            <pre><code><span class="code-key">instagram</span>:
+  <span class="code-key">username</span>: <span class="code-string">"your_username"</span>
+  <span class="code-key">max_reels_per_run</span>: <span class="code-value">3</span>
+  <span class="code-key">max_duration</span>: <span class="code-value">0</span>
+  <span class="code-comment"># since_date: "2025-01-01"</span>
+
+<span class="code-key">youtube</span>:
+  <span class="code-key">category_id</span>: <span class="code-string">"22"</span>
+  <span class="code-key">privacy_status</span>: <span class="code-string">"public"</span>
+  <span class="code-key">default_language</span>: <span class="code-string">"en"</span>
+  <span class="code-key">title_prefix</span>: <span class="code-string">""</span>
+  <span class="code-key">title_suffix</span>: <span class="code-string">""</span>
+  <span class="code-key">description_suffix</span>: <span class="code-string">"\n\n#Shorts"</span>
+  <span class="code-key">made_for_kids</span>: <span class="code-value">false</span>
+
+<span class="code-key">sync</span>:
+  <span class="code-key">data_dir</span>: <span class="code-string">"data"</span>
+  <span class="code-key">download_dir</span>: <span class="code-string">"downloads"</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Secrets Reference ──────────────────────────── -->
+  <section id="secrets">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Secrets</div>
+        <h2>GitHub Secrets<br/>reference.</h2>
+        <p>Add these in your fork under Settings &gt; Secrets and variables &gt; Actions.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Secret</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>YOUTUBE_CLIENT_ID</code></td>
+              <td>Yes</td>
+              <td>Google OAuth client ID from setup script</td>
+            </tr>
+            <tr>
+              <td><code>YOUTUBE_CLIENT_SECRET</code></td>
+              <td>Yes</td>
+              <td>Google OAuth client secret from setup script</td>
+            </tr>
+            <tr>
+              <td><code>YOUTUBE_REFRESH_TOKEN</code></td>
+              <td>Yes</td>
+              <td>YouTube refresh token from setup script</td>
+            </tr>
+            <tr>
+              <td><code>IG_PASSWORD</code></td>
+              <td>Pick one</td>
+              <td>Instagram password (no 2FA accounts)</td>
+            </tr>
+            <tr>
+              <td><code>IG_SESSION_BASE64</code></td>
+              <td>Pick one</td>
+              <td>Base64 session cookie (for 2FA accounts)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 20px; font-size: 0.88rem; color: var(--gray-500);">
+        For Instagram auth, use <strong>either</strong> <code>IG_PASSWORD</code> or <code>IG_SESSION_BASE64</code> &mdash; you don't need both.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Running Locally ────────────────────────────── -->
+  <section style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Local</div>
+        <h2>Run it<br/>on your machine.</h2>
+        <p>Perfect for testing or one-off syncs.</p>
+      </div>
+
+      <div style="max-width: 640px;">
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span class="code-label">terminal</span>
+          </div>
+          <pre><code><span class="code-comment"># Clone and install</span>
+git clone https://github.com/YOUR_USER/instoob.git
+cd instoob
+pip install -r requirements.txt
+
+<span class="code-comment"># Configure</span>
+cp config.example.yml config.yml
+cp .env.example .env
+<span class="code-comment"># Edit config.yml and .env with your details</span>
+
+<span class="code-comment"># Run sync</span>
+python main.py sync
+
+<span class="code-comment"># Verbose output</span>
+python main.py sync --verbose</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Schedule ───────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Schedule</div>
+        <h2>Set your<br/>sync frequency.</h2>
+        <p>The GitHub Actions workflow runs every 6 hours by default. Customize the cron schedule in the workflow file.</p>
+      </div>
+
+      <div style="max-width: 640px;">
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span class="code-label">.github/workflows/sync.yml</span>
+          </div>
+          <pre><code><span class="code-key">schedule</span>:
+  - <span class="code-key">cron</span>: <span class="code-string">"0 */6 * * *"</span>  <span class="code-comment"># Every 6 hours</span>
+  <span class="code-comment"># "0 */12 * * *"  Every 12 hours</span>
+  <span class="code-comment"># "0 9 * * *"     Daily at 9 AM UTC</span>
+  <span class="code-comment"># "0 9 * * 1"     Weekly on Monday</span></code></pre>
+        </div>
+
+        <div style="margin-top: 24px; padding: 20px 24px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; font-size: 0.88rem; color: #1e40af;">
+          <strong>Quota note:</strong> YouTube API allows ~6 uploads per day (10,000 units, ~1,600 per upload). With <code>max_reels_per_run: 3</code> and 4 runs/day, you may approach the limit. Adjust as needed.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Troubleshooting ────────────────────────────── -->
+  <section id="troubleshooting" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Help</div>
+        <h2>Common issues<br/>and fixes.</h2>
+      </div>
+
+      <div class="faq-list" style="max-width: 720px;">
+        <details class="faq-item">
+          <summary>Instagram auth is failing</summary>
+          <div class="faq-body">
+            If using password login, double-check your <code>IG_PASSWORD</code> secret. If you have 2FA enabled, you must use <code>IG_SESSION_BASE64</code> instead. Sessions can expire after a few months &mdash; re-generate by running <code>instaloader --login USERNAME</code> again.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>YouTube upload returns an auth error</summary>
+          <div class="faq-body">
+            Your refresh token may have expired (this happens every 7 days in "Testing" mode). Run <code>python setup_youtube.py</code> again to get a new token, or publish your Google Cloud app to get permanent tokens.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Getting "Access blocked" on YouTube OAuth</summary>
+          <div class="faq-body">
+            Your Google Cloud project is in "Testing" mode and your email isn't listed as a test user. Go to Google Cloud Console &gt; OAuth consent screen &gt; Test users, and add your email address.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Quota exceeded error</summary>
+          <div class="faq-body">
+            YouTube API has a daily quota of 10,000 units (~6 uploads). Reduce <code>max_reels_per_run</code> in <code>config.yml</code> or change the cron schedule to run less frequently.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>No reels found during sync</summary>
+          <div class="faq-body">
+            Check that the Instagram username in <code>config.yml</code> is correct and the profile has public video posts. If using <code>since_date</code>, ensure the date isn't set in the future.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Duplicate uploads appearing</summary>
+          <div class="faq-body">
+            Make sure <code>data/synced.json</code> is being committed back to your repo. The GitHub Actions workflow handles this automatically. If running locally, the state file is saved after each run.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-text">instoob &mdash; MIT License &mdash; Built by <a href="https://sunithvs.com" target="_blank" style="color: var(--gray-600); text-decoration: underline;">Sunith VS</a></span>
+      <ul class="footer-links">
+        <li><a href="https://github.com/truevibecoder/instoob" target="_blank">GitHub</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="#setup">Setup Guide</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
