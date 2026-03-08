@@ -331,6 +331,10 @@ section {
   gap: 20px;
 }
 
+.steps-grid-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
 .step-card {
   background: var(--white);
   border: 1px solid var(--gray-200);
@@ -846,7 +850,8 @@ section {
     white-space: nowrap;
   }
 
-  .steps-grid {
+  .steps-grid,
+  .steps-grid-2col {
     grid-template-columns: 1fr;
   }
 
