@@ -6,10 +6,8 @@ from pathlib import Path
 
 from .config import AppConfig
 from .instagram import (
-    create_loader,
     download_reel,
     fetch_reels,
-    login,
 )
 from .state import add_synced_reel, get_synced_shortcodes, load_state, save_state
 from .youtube import get_authenticated_service, upload_video
@@ -33,13 +31,8 @@ def run_sync(config: AppConfig) -> int:
     synced = get_synced_shortcodes(state)
     logger.info(f"Already synced: {len(synced)} reels")
 
-    # Set up Instagram
-    loader = create_loader()
-    login(loader, username)
-
-    # Fetch new reels
+    # Fetch new reels (no login required)
     reels = fetch_reels(
-        loader=loader,
         username=username,
         max_count=config.instagram.max_reels_per_run,
         max_duration=config.instagram.max_duration,

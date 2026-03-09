@@ -30,8 +30,7 @@ jobs:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-          IG_PASSWORD: ${{ secrets.IG_PASSWORD }}
-          IG_SESSION_BASE64: ${{ secrets.IG_SESSION_BASE64 }}
+          IG_SESSION_ID: ${{ secrets.IG_SESSION_ID }}
         run: python main.py sync
 
       - name: Commit state changes
